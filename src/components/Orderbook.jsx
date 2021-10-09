@@ -168,12 +168,12 @@ const OrderbookRow = React.memo(
 
     let formattedSize =
       market?.minOrderSize && !isNaN(size)
-        ? Number(size).toFixed(getDecimalCount(market.minOrderSize) + 1)
+        ? Number(size).toFixed(getDecimalCount(market.minOrderSize) + 3)
         : size;
 
     let formattedPrice =
       market?.tickSize && !isNaN(price)
-        ? Number(price).toFixed(getDecimalCount(market.tickSize) + 1)
+        ? Number(price).toFixed(getDecimalCount(market.tickSize) + 3)
         : price;
 
     return (

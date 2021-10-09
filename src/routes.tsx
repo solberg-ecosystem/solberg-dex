@@ -26,20 +26,6 @@ export function Routes() {
             <Route exact path="/orders" component={OpenOrdersPage} />
             <Route exact path="/balances" component={BalancesPage} />
             <Route exact path="/convert" component={ConvertPage} />
-            <Route
-              exact
-              path="/list-new-market"
-              component={ListNewMarketPage}
-            />
-            <Route exact path="/pools">
-              <PoolListPage />
-            </Route>
-            <Route exact path="/pools/new">
-              <NewPoolPage />
-            </Route>
-            <Route exact path="/pools/:poolAddress">
-              <PoolPage />
-            </Route>
           </Switch>
         </BasicLayout>
       </HashRouter>

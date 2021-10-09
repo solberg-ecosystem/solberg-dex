@@ -21,12 +21,13 @@ import {
   InfoCircleOutlined,
   PlusCircleOutlined,
 } from '@ant-design/icons';
+import { PublicKey } from '@solana/web3.js';
 import CustomMarketDialog from '../components/CustomMarketDialog';
 import { notify } from '../utils/notifications';
 import { useHistory, useParams } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 
-import { TVChartContainer } from '../components/TradingView';
+//import { TVChartContainer } from '../components/TradingView';
 // Use following stub for quick setup without the TradingView private dependency
 // function TVChartContainer() {
 //   return <></>
@@ -46,6 +47,7 @@ const Wrapper = styled.div`
 
 export default function TradePage() {
   const { marketAddress } = useParams();
+
   useEffect(() => {
     if (marketAddress) {
       localStorage.setItem('marketAddress', JSON.stringify(marketAddress));
@@ -84,7 +86,7 @@ function TradePageInner() {
   });
 
   useEffect(() => {
-    document.title = marketName ? `${marketName} — Serum` : 'Serum';
+    document.title = marketName ? `${marketName} — SLB DEX` : 'SLB DEX';
   }, [marketName]);
 
   const changeOrderRef = useRef<
@@ -98,7 +100,7 @@ function TradePageInner() {
         width: window.innerWidth,
       });
     };
-
+    addSLB();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -130,7 +132,24 @@ function TradePageInner() {
       return <RenderNormal {...componentProps} />;
     }
   })();
-
+  const addSLB = () => {
+    let paramX ={
+      address: new PublicKey('46jD4hpmvUAbhKaoAjdzFkY82VW1j9SMTEYFGcTor8Ww').toBase58(),
+      programId: new PublicKey('9xQeWvG816bUx9EPjHmaT23yvVM2ZWbrrpZb9PusVFin').toBase58(),
+      name: 'SLB/USDT',
+      baseLabel: 'SLB',
+      quoteLabel: 'USDT',
+    }
+    const marketInfo = getMarketInfos(customMarkets).some(
+      (m) => m.address.toBase58() === paramX.address,
+    );
+    if (marketInfo) {
+      return;
+    }
+    const newCustomMarkets = [...customMarkets, paramX];
+    setCustomMarkets(newCustomMarkets);
+    setMarketAddress(paramX.address);
+  };
   const onAddCustomMarket = (customMarket) => {
     const marketInfo = getMarketInfos(customMarkets).some(
       (m) => m.address.toBase58() === customMarket.address,
@@ -146,7 +165,7 @@ function TradePageInner() {
     setCustomMarkets(newCustomMarkets);
     setMarketAddress(customMarket.address);
   };
-
+  
   const onDeleteCustomMarket = (address) => {
     const newCustomMarkets = customMarkets.filter((m) => m.address !== address);
     setCustomMarkets(newCustomMarkets);
@@ -182,13 +201,13 @@ function TradePageInner() {
                 title="Market address"
                 trigger="click"
               >
-                <InfoCircleOutlined style={{ color: '#2abdd2' }} />
+                <InfoCircleOutlined style={{ color: '#905cee' }} />
               </Popover>
             </Col>
           ) : null}
           <Col>
             <PlusCircleOutlined
-              style={{ color: '#2abdd2' }}
+              style={{ color: '#905cee' }}
               onClick={() => setAddMarketVisible(true)}
             />
           </Col>
@@ -342,9 +361,7 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize }) => {
       }}
     >
       <Col flex="auto" style={{ height: '50vh' }}>
-        <Row style={{ height: '100%' }}>
-          <TVChartContainer />
-        </Row>
+     
         <Row style={{ height: '70%' }}>
           <UserInfoTable />
         </Row>
@@ -367,9 +384,7 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize }) => {
 const RenderSmall = ({ onChangeOrderRef, onPrice, onSize }) => {
   return (
     <>
-      <Row style={{ height: '30vh' }}>
-        <TVChartContainer />
-      </Row>
+  
       <Row
         style={{
           height: '900px',
@@ -406,9 +421,7 @@ const RenderSmall = ({ onChangeOrderRef, onPrice, onSize }) => {
 const RenderSmaller = ({ onChangeOrderRef, onPrice, onSize }) => {
   return (
     <>
-      <Row style={{ height: '50vh' }}>
-        <TVChartContainer />
-      </Row>
+   
       <Row>
         <Col xs={24} sm={12} style={{ height: '100%', display: 'flex' }}>
           <TradeForm style={{ flex: 1 }} setChangeOrderRef={onChangeOrderRef} />

@@ -30,7 +30,7 @@ const Wrapper = styled.div`
 const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
-  color: #2abdd2;
+  color: #905cee;
   font-weight: bold;
   cursor: pointer;
   img {
@@ -40,14 +40,7 @@ const LogoWrapper = styled.div`
 `;
 
 const EXTERNAL_LINKS = {
-  '/learn': 'https://docs.projectserum.com/trade-on-serum-dex/trade-on-serum-dex-1',
-  '/add-market': 'https://serum-academy.com/en/add-market/',
-  '/wallet-support': 'https://serum-academy.com/en/wallet-support',
-  '/dex-list': 'https://serum-academy.com/en/dex-list/',
-  '/developer-resources': 'https://serum-academy.com/en/developer-resources/',
-  '/explorer': 'https://solscan.io',
-  '/srm-faq': 'https://projectserum.com/srm-faq',
-  '/swap': 'https://swap.projectserum.com',
+  '/swap': 'https://raydium.io/swap/?ammId=HdbmraBtbNKuLG5FqMZ4ocfHhCaAuV8qkTyE1iqs8BQu',
 };
 
 export default function TopBar() {
@@ -142,7 +135,7 @@ export default function TopBar() {
       <Wrapper>
         <LogoWrapper onClick={() => history.push(tradePageUrl)}>
           <img src={logo} alt="" />
-          {'SERUM'}
+          {'SOLBERG'}
         </LogoWrapper>
         <Menu
           mode="horizontal"
@@ -185,75 +178,7 @@ export default function TopBar() {
               CONVERT
             </Menu.Item>
           )}
-          {(!searchFocussed || location.pathname === '/list-new-market') && (
-            <Menu.Item key="/list-new-market" style={{ margin: '0 10px' }}>
-              ADD MARKET
-            </Menu.Item>
-          )}
-          {!searchFocussed && (
-            <Menu.SubMenu
-              title="LEARN"
-              onTitleClick={() =>
-                window.open(EXTERNAL_LINKS['/learn'], '_blank')
-              }
-              style={{ margin: '0 0px 0 10px' }}
-            >
-              <Menu.Item key="/add-market">
-                <a
-                  href={EXTERNAL_LINKS['/add-market']}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Adding a market
-                </a>
-              </Menu.Item>
-              <Menu.Item key="/wallet-support">
-                <a
-                  href={EXTERNAL_LINKS['/wallet-support']}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Supported wallets
-                </a>
-              </Menu.Item>
-              <Menu.Item key="/dex-list">
-                <a
-                  href={EXTERNAL_LINKS['/dex-list']}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  DEX list
-                </a>
-              </Menu.Item>
-              <Menu.Item key="/developer-resources">
-                <a
-                  href={EXTERNAL_LINKS['/developer-resources']}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Developer resources
-                </a>
-              </Menu.Item>
-              <Menu.Item key="/explorer">
-                <a
-                  href={EXTERNAL_LINKS['/explorer']}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Solana block explorer
-                </a>
-              </Menu.Item>
-              <Menu.Item key="/srm-faq">
-                <a
-                  href={EXTERNAL_LINKS['/srm-faq']}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  SRM FAQ
-                </a>
-              </Menu.Item>
-            </Menu.SubMenu>
-          )}
+      
         </Menu>
         <div
           style={{
@@ -262,50 +187,8 @@ export default function TopBar() {
             paddingRight: 5,
           }}
         >
-          <AppSearch
-            onFocus={() => setSearchFocussed(true)}
-            onBlur={() => setSearchFocussed(false)}
-            focussed={searchFocussed}
-            width={searchFocussed ? '350px' : '35px'}
-          />
         </div>
-        <div>
-          <Row
-            align="middle"
-            style={{ paddingLeft: 5, paddingRight: 5 }}
-            gutter={16}
-          >
-            <Col>
-              <PlusCircleOutlined
-                style={{ color: '#2abdd2' }}
-                onClick={() => setAddEndpointVisible(true)}
-              />
-            </Col>
-            <Col>
-              <Popover
-                content={endpoint}
-                placement="bottomRight"
-                title="URL"
-                trigger="hover"
-              >
-                <InfoCircleOutlined style={{ color: '#2abdd2' }} />
-              </Popover>
-            </Col>
-            <Col>
-              <Select
-                onSelect={setEndpoint}
-                value={endpoint}
-                style={{ marginRight: 8, width: '150px' }}
-              >
-                {availableEndpoints.map(({ name, endpoint }) => (
-                  <Select.Option value={endpoint} key={endpoint}>
-                    {name}
-                  </Select.Option>
-                ))}
-              </Select>
-            </Col>
-          </Row>
-        </div>
+      
         {connected && (
           <div>
             <Popover
