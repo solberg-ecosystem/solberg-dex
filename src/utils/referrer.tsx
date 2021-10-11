@@ -65,20 +65,39 @@ export const useFeesAccountsFromRefCode = (refCode: string | undefined) => {
   const [usdc, setUsdc] = useState<PublicKey | undefined>(undefined);
   const [usdt, setUsdt] = useState<PublicKey | undefined>(undefined);
 
+  // useEffect(() => {
+  //   const fn = async () => {
+  //     let usdcAddress: undefined | PublicKey = undefined;
+  //     let usdtAddress: undefined | PublicKey = undefined;
+     
+  //       setUsdc(
+  //         new PublicKey("8bZ2sU6rSFSuTMx9J4MzWAJ85y2PKi7Xge1VqmiKTerb")
+  //         ,
+  //       );
+  //       setUsdt(
+  //         new PublicKey("8bZ2sU6rSFSuTMx9J4MzWAJ85y2PKi7Xge1VqmiKTerb")
+  //           ,
+  //       );
+  //       return;
+      
+  //   };
+  //   fn();
+  // }, [connection, refCode]);
+
   useEffect(() => {
     const fn = async () => {
       let usdcAddress: undefined | PublicKey = undefined;
       let usdtAddress: undefined | PublicKey = undefined;
+      console.log(refCode);
+      console.log('refcode here');
       if (!refCode) {
         setUsdc(
-          process.env.REACT_APP_USDC_REFERRAL_FEES_ADDRESS
-            ? new PublicKey(process.env.REACT_APP_USDC_REFERRAL_FEES_ADDRESS)
-            : undefined,
+          new PublicKey("8bZ2sU6rSFSuTMx9J4MzWAJ85y2PKi7Xge1VqmiKTerb")
+          ,
         );
         setUsdt(
-          process.env.REACT_APP_USDT_REFERRAL_FEES_ADDRESS
-            ? new PublicKey(process.env.REACT_APP_USDT_REFERRAL_FEES_ADDRESS)
-            : undefined,
+          new PublicKey("8bZ2sU6rSFSuTMx9J4MzWAJ85y2PKi7Xge1VqmiKTerb")
+            ,
         );
         return;
       }
@@ -107,6 +126,9 @@ export const useFeesAccountsFromRefCode = (refCode: string | undefined) => {
         const usdtAccountInfo = await connection.getAccountInfo(usdtAddress);
         if (!!usdcAccountInfo?.data) setUsdc(usdcAddress);
         if (!!usdtAccountInfo?.data) setUsdt(usdtAddress);
+
+        console.log(refCode);
+
       } catch (err) {
         console.warn(`Error getting refcode ${err}`);
       }
