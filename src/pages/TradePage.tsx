@@ -13,7 +13,7 @@ import {
   useUnmigratedDeprecatedMarkets,
 } from '../utils/markets';
 import TradeForm from '../components/TradeForm';
-import TradesTable from '../components/TradesTable';
+//import TradesTable from '../components/TradesTable';
 import LinkAddress from '../components/LinkAddress';
 import DeprecatedMarketsInstructions from '../components/DeprecatedMarketsInstructions';
 import {
@@ -101,6 +101,7 @@ function TradePageInner() {
       });
     };
     addSLB();
+    
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -140,15 +141,38 @@ function TradePageInner() {
       baseLabel: 'SLB',
       quoteLabel: 'USDT',
     }
+
     const marketInfo = getMarketInfos(customMarkets).some(
       (m) => m.address.toBase58() === paramX.address,
     );
+  
     if (marketInfo) {
+
+      addSLBSOL();
       return;
-    }
-    const newCustomMarkets = [...customMarkets, paramX];
+    }      
+    addSLBSOL();
+    const newCustomMarkets = [...customMarkets, paramX];  
     setCustomMarkets(newCustomMarkets);
     setMarketAddress(paramX.address);
+  };
+  const addSLBSOL = () => {
+    let paramSol ={
+      address: new PublicKey('GQk1KCwMn6SigfMjQ77Q6Mprgh4Qg54eijavDT31VJPZ').toBase58(),
+      programId: new PublicKey('9xQeWvG816bUx9EPjHmaT23yvVM2ZWbrrpZb9PusVFin').toBase58(),
+      name: 'SLB/SOL',
+      baseLabel: 'SLB',
+      quoteLabel: 'SOL',
+    }
+    const marketInfoSOL = getMarketInfos(customMarkets).some(
+      (m) => m.address.toBase58() === paramSol.address,
+    );
+    if ( marketInfoSOL) {
+      return;
+    }
+    const newCustomMarkets = [...customMarkets,paramSol];  
+    setCustomMarkets(newCustomMarkets);
+    console.log('added slbsol');
   };
   const onAddCustomMarket = (customMarket) => {
     const marketInfo = getMarketInfos(customMarkets).some(
@@ -368,7 +392,7 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize }) => {
       </Col>
       <Col flex={'360px'} style={{ height: '100%' }}>
         <Orderbook smallScreen={false} onPrice={onPrice} onSize={onSize} />
-        <TradesTable smallScreen={false} />
+ 
       </Col>
       <Col
         flex="400px"
@@ -397,9 +421,6 @@ const RenderSmall = ({ onChangeOrderRef, onPrice, onSize }) => {
             onPrice={onPrice}
             onSize={onSize}
           />
-        </Col>
-        <Col flex="auto" style={{ height: '100%', display: 'flex' }}>
-          <TradesTable smallScreen={true} />
         </Col>
         <Col
           flex="400px"
@@ -437,9 +458,6 @@ const RenderSmaller = ({ onChangeOrderRef, onPrice, onSize }) => {
       >
         <Col xs={24} sm={12} style={{ height: '100%', display: 'flex' }}>
           <Orderbook smallScreen={true} onPrice={onPrice} onSize={onSize} />
-        </Col>
-        <Col xs={24} sm={12} style={{ height: '100%', display: 'flex' }}>
-          <TradesTable smallScreen={true} />
         </Col>
       </Row>
       <Row>

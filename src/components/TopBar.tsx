@@ -40,7 +40,9 @@ const LogoWrapper = styled.div`
 `;
 
 const EXTERNAL_LINKS = {
-  '/swap': 'https://raydium.io/swap/?ammId=HdbmraBtbNKuLG5FqMZ4ocfHhCaAuV8qkTyE1iqs8BQu',
+  '/swap SOL': 'https://raydium.io/swap/?ammId=7nePGGLXC8JXj2UYRqa9eToHEEWjpQAuoXh5HX5cRKt',
+  '/swap USDT': 'https://raydium.io/swap/?ammId=HdbmraBtbNKuLG5FqMZ4ocfHhCaAuV8qkTyE1iqs8BQu',
+
 };
 
 export default function TopBar() {
@@ -153,24 +155,25 @@ export default function TopBar() {
             TRADE
           </Menu.Item>
           {!searchFocussed && (
-            <Menu.Item key="/swap" style={{ margin: '0 10px' }}>
+            <Menu.Item key="/swap SOL" style={{ margin: '0 10px' }}>
               <a
-                href={EXTERNAL_LINKS['/swap']}
+                href={EXTERNAL_LINKS['/swap SOL']}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                SWAP
+                SWAP SOL
               </a>
             </Menu.Item>
           )}
-          {connected && (!searchFocussed || location.pathname === '/balances') && (
-            <Menu.Item key="/balances" style={{ margin: '0 10px' }}>
-              BALANCES
-            </Menu.Item>
-          )}
-          {connected && (!searchFocussed || location.pathname === '/orders') && (
-            <Menu.Item key="/orders" style={{ margin: '0 10px' }}>
-              ORDERS
+                    {!searchFocussed && (
+            <Menu.Item key="/swap USDT" style={{ margin: '0 10px' }}>
+              <a
+                href={EXTERNAL_LINKS['/swap USDT']}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                SWAP USDT
+              </a>
             </Menu.Item>
           )}
           {connected && (!searchFocussed || location.pathname === '/convert') && (
