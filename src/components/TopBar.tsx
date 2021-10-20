@@ -42,6 +42,7 @@ const LogoWrapper = styled.div`
 const EXTERNAL_LINKS = {
   '/swap SOL': 'https://raydium.io/swap/?ammId=7nePGGLXC8JXj2UYRqa9eToHEEWjpQAuoXh5HX5cRKt',
   '/swap USDT': 'https://raydium.io/swap/?ammId=HdbmraBtbNKuLG5FqMZ4ocfHhCaAuV8qkTyE1iqs8BQu',
+  '/swap USDC': 'https://raydium.io/swap/?from=2uRFEWRBQLEKpLmF8mohFZGDcFQmrkQEEZmHQvMUBvY7&to=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
 
 };
 
@@ -173,6 +174,17 @@ export default function TopBar() {
                 rel="noopener noreferrer"
               >
                 SWAP USDT
+              </a>
+            </Menu.Item>
+          )}
+                         {!searchFocussed && (
+            <Menu.Item key="/swap USDC" style={{ margin: '0 10px' }}>
+              <a
+                href={EXTERNAL_LINKS['/swap USDC']}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                SWAP USDC
               </a>
             </Menu.Item>
           )}

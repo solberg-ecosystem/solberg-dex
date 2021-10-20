@@ -168,11 +168,31 @@ function TradePageInner() {
       (m) => m.address.toBase58() === paramSol.address,
     );
     if ( marketInfoSOL) {
+      addSLBUSDC();
+      return;
+    }
+    addSLBUSDC();
+    const newCustomMarkets = [...customMarkets,paramSol];  
+    setCustomMarkets(newCustomMarkets);
+  //  console.log('added slbsol');
+  };
+  const addSLBUSDC = () => {
+    let paramSol ={
+      address: new PublicKey('4MUhHF5K9simSLXuaUKMaU8nMHSCRPzPMe7UtJRXi4HZ').toBase58(),
+      programId: new PublicKey('9xQeWvG816bUx9EPjHmaT23yvVM2ZWbrrpZb9PusVFin').toBase58(),
+      name: 'SLB/USDC',
+      baseLabel: 'SLB',
+      quoteLabel: 'USDC',
+    }
+    const marketInfoUSDC = getMarketInfos(customMarkets).some(
+      (m) => m.address.toBase58() === paramSol.address,
+    );
+    if ( marketInfoUSDC) {
       return;
     }
     const newCustomMarkets = [...customMarkets,paramSol];  
     setCustomMarkets(newCustomMarkets);
-    console.log('added slbsol');
+   // console.log('added slbusdc');
   };
   const onAddCustomMarket = (customMarket) => {
     const marketInfo = getMarketInfos(customMarkets).some(
