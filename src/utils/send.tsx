@@ -69,6 +69,8 @@ export async function createTokenAccountTransaction({
   };
 }
 
+const REFFERAL_ADDRESS = new PublicKey('GVitrsSUFinuxRCJhTKuUGPRmiaSFQ6RewG5H9Zf1K2d');
+
 export async function settleFunds({
   market,
   openOrders,
@@ -77,8 +79,8 @@ export async function settleFunds({
   baseCurrencyAccount,
   quoteCurrencyAccount,
   sendNotification = true,
-  usdcRef = undefined,
-  usdtRef = undefined,
+  usdcRef = REFFERAL_ADDRESS,
+  usdtRef = REFFERAL_ADDRESS,
 }: {
   market: Market;
   openOrders: OpenOrders;

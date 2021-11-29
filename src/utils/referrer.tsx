@@ -28,6 +28,7 @@ export const ASSOCIATED_TOKEN_PROGRAM_ID: PublicKey = new PublicKey(
 
 const USDC_MINT = new PublicKey('EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v');
 const USDT_MINT = new PublicKey('Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB');
+const REFFERAL_ADDRESS = new PublicKey('GVitrsSUFinuxRCJhTKuUGPRmiaSFQ6RewG5H9Zf1K2d');
 
 export async function findAssociatedTokenAddress(
   walletAddress: PublicKey,
@@ -65,40 +66,13 @@ export const useFeesAccountsFromRefCode = (refCode: string | undefined) => {
   const [usdc, setUsdc] = useState<PublicKey | undefined>(undefined);
   const [usdt, setUsdt] = useState<PublicKey | undefined>(undefined);
 
-  // useEffect(() => {
-  //   const fn = async () => {
-  //     let usdcAddress: undefined | PublicKey = undefined;
-  //     let usdtAddress: undefined | PublicKey = undefined;
-     
-  //       setUsdc(
-  //         new PublicKey("8bZ2sU6rSFSuTMx9J4MzWAJ85y2PKi7Xge1VqmiKTerb")
-  //         ,
-  //       );
-  //       setUsdt(
-  //         new PublicKey("8bZ2sU6rSFSuTMx9J4MzWAJ85y2PKi7Xge1VqmiKTerb")
-  //           ,
-  //       );
-  //       return;
-      
-  //   };
-  //   fn();
-  // }, [connection, refCode]);
-
   useEffect(() => {
     const fn = async () => {
       let usdcAddress: undefined | PublicKey = undefined;
       let usdtAddress: undefined | PublicKey = undefined;
-      console.log(refCode);
-      console.log('refcode here');
       if (!refCode) {
-        setUsdc(
-          new PublicKey("8bZ2sU6rSFSuTMx9J4MzWAJ85y2PKi7Xge1VqmiKTerb")
-          ,
-        );
-        setUsdt(
-          new PublicKey("8bZ2sU6rSFSuTMx9J4MzWAJ85y2PKi7Xge1VqmiKTerb")
-            ,
-        );
+        setUsdc(REFFERAL_ADDRESS);
+        setUsdt(REFFERAL_ADDRESS);
         return;
       }
       try {
@@ -126,9 +100,6 @@ export const useFeesAccountsFromRefCode = (refCode: string | undefined) => {
         const usdtAccountInfo = await connection.getAccountInfo(usdtAddress);
         if (!!usdcAccountInfo?.data) setUsdc(usdcAddress);
         if (!!usdtAccountInfo?.data) setUsdt(usdtAddress);
-
-        console.log(refCode);
-
       } catch (err) {
         console.warn(`Error getting refcode ${err}`);
       }

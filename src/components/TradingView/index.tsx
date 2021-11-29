@@ -142,7 +142,7 @@ export const TVChartContainer = () => {
         // @ts-ignore
         .subscribe('onAutoSaveNeeded', () => tvWidget.saveChartToServer());
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // -disable-next-line react-hooks/exhaustive-depseslint
   }, [market, tvWidgetRef.current]);
 
   return <div id={defaultProps.containerId} className={'TVChartContainer'} />;

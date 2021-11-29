@@ -50,6 +50,8 @@ export default function WalletBalancesTable({
           description: 'TokenAccounts not connected',
           type: 'error',
         });
+        console.log('Error settling funds: TokenAccounts not connected');
+
         return;
       }
       if (!allMarkets || !allMarketsConnected) {
@@ -58,6 +60,8 @@ export default function WalletBalancesTable({
           description: 'Markets not connected',
           type: 'error',
         });
+        console.log('Error settling funds: Markets not connected');
+
         return;
       }
       await settleAllFunds({
@@ -73,6 +77,8 @@ export default function WalletBalancesTable({
         description: e.message,
         type: 'error',
       });
+      console.log('Error settling funds: ' + e.message);
+
     } finally {
       setSettlingFunds(false);
     }

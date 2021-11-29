@@ -54,6 +54,7 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+
   },
   "jest": {
     "transformIgnorePatterns": [

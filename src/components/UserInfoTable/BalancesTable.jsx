@@ -46,6 +46,8 @@ export default function BalancesTable({
         description: e.message,
         type: 'error',
       });
+      console.log('Error settling funds: ' + e.message);
+
       return;
     }
     onSettleSuccess && onSettleSuccess();

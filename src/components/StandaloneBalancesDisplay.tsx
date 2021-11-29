@@ -73,6 +73,8 @@ export default function StandaloneBalancesDisplay() {
         description: 'market is undefined',
         type: 'error',
       });
+      console.log('Error settling funds: market is undefined');
+
       return;
     }
     if (!openOrdersAccount) {
@@ -81,6 +83,8 @@ export default function StandaloneBalancesDisplay() {
         description: 'Open orders account is undefined',
         type: 'error',
       });
+      console.log('Error settling funds: Open orders account is undefined');
+
       return;
     }
     if (!baseCurrencyAccount) {
@@ -89,6 +93,8 @@ export default function StandaloneBalancesDisplay() {
         description: 'Open orders account is undefined',
         type: 'error',
       });
+      console.log('Error settling funds: Open orders account is undefined');
+
       return;
     }
     if (!quoteCurrencyAccount) {
@@ -97,6 +103,8 @@ export default function StandaloneBalancesDisplay() {
         description: 'Open orders account is undefined',
         type: 'error',
       });
+      console.log('Error settling funds: Open orders account is undefined');
+
       return;
     }
 
@@ -117,6 +125,8 @@ export default function StandaloneBalancesDisplay() {
         description: e.message,
         type: 'error',
       });
+      console.log('Error settling funds: ' + e.message);
+
     }
   }
 
