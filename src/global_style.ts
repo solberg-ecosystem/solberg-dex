@@ -17,23 +17,23 @@ input[type=number]:focus::-webkit-inner-spin-button {
 }
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #2d313c;
+  background: #11161d;
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #5b5f67;
+  background: #11161D;
 }
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #5b5f67;
+  background: #11161D;
 }
 .ant-slider-track, .ant-slider:hover .ant-slider-track {
-  background-color: #905cee;
+  background-color: #11161D;
   opacity: 0.75;
 }
 .ant-slider-track,
 .ant-slider ant-slider-track:hover {
-  background-color: #905cee;
+  background-color: #11161D;
   opacity: 0.75;
 }
 .ant-slider-dot-active,

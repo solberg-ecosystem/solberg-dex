@@ -135,7 +135,7 @@ function TradePageInner() {
   })();
   const addSLB = () => {
     let paramX ={
-      address: new PublicKey('46jD4hpmvUAbhKaoAjdzFkY82VW1j9SMTEYFGcTor8Ww').toBase58(),
+      address: new PublicKey('7jbVj4hSWRM5vcf2riAojBBnERy6Fj4AobKA4VwLtEU5').toBase58(),
       programId: new PublicKey('9xQeWvG816bUx9EPjHmaT23yvVM2ZWbrrpZb9PusVFin').toBase58(),
       name: 'SLB/USDT',
       baseLabel: 'SLB',
@@ -149,9 +149,11 @@ function TradePageInner() {
     if (marketInfo) {
 
       addSLBSOL();
+      addSLBUSDC();
       return;
     }      
     addSLBSOL();
+    addSLBUSDC();
     const newCustomMarkets = [...customMarkets, paramX];  
     setCustomMarkets(newCustomMarkets);
     setMarketAddress(paramX.address);
@@ -173,6 +175,24 @@ function TradePageInner() {
     const newCustomMarkets = [...customMarkets,paramSol];  
     setCustomMarkets(newCustomMarkets);
     console.log('added slbsol');
+  };
+  const addSLBUSDC = () => {
+    let paramSol ={
+      address: new PublicKey('4MUhHF5K9simSLXuaUKMaU8nMHSCRPzPMe7UtJRXi4HZ').toBase58(),
+      programId: new PublicKey('9xQeWvG816bUx9EPjHmaT23yvVM2ZWbrrpZb9PusVFin').toBase58(),
+      name: 'SLB/USDC',
+      baseLabel: 'SLB',
+      quoteLabel: 'USDC',
+    }
+    const marketInfoSOL = getMarketInfos(customMarkets).some(
+      (m) => m.address.toBase58() === paramSol.address,
+    );
+    if ( marketInfoSOL) {
+      return;
+    }
+    const newCustomMarkets = [...customMarkets,paramSol];  
+    setCustomMarkets(newCustomMarkets);
+    console.log('added slbusdc');
   };
   const onAddCustomMarket = (customMarket) => {
     const marketInfo = getMarketInfos(customMarkets).some(
@@ -384,6 +404,14 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize }) => {
         flexWrap: 'nowrap',
       }}
     >
+    <Col
+      flex="400px"
+      style={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+    >
+      <TradeForm setChangeOrderRef={onChangeOrderRef} />
+      <StandaloneBalancesDisplay />
+    </Col>
+
       <Col flex="auto" style={{ height: '50vh' }}>
       <Row style={{ height: '100%' }}>
           <TVChartContainer />
@@ -393,17 +421,12 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize }) => {
           <UserInfoTable />
         </Row>
       </Col>
+
       <Col flex={'360px'} style={{ height: '100%' }}>
         <Orderbook smallScreen={false} onPrice={onPrice} onSize={onSize} />
  
       </Col>
-      <Col
-        flex="400px"
-        style={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-      >
-        <TradeForm setChangeOrderRef={onChangeOrderRef} />
-        <StandaloneBalancesDisplay />
-      </Col>
+      
     </Row>
   );
 };
@@ -419,6 +442,14 @@ const RenderSmall = ({ onChangeOrderRef, onPrice, onSize }) => {
           height: '900px',
         }}
       >
+        <Col
+          flex="400px"
+          style={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+        >
+          <TradeForm setChangeOrderRef={onChangeOrderRef} />
+          <StandaloneBalancesDisplay />
+        </Col>
+
         <Col flex="auto" style={{ height: '100%', display: 'flex' }}>
           <Orderbook
             smallScreen={true}
@@ -427,13 +458,7 @@ const RenderSmall = ({ onChangeOrderRef, onPrice, onSize }) => {
             onSize={onSize}
           />
         </Col>
-        <Col
-          flex="400px"
-          style={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-        >
-          <TradeForm setChangeOrderRef={onChangeOrderRef} />
-          <StandaloneBalancesDisplay />
-        </Col>
+        
       </Row>
       <Row>
         <Col flex="auto">
@@ -447,16 +472,16 @@ const RenderSmall = ({ onChangeOrderRef, onPrice, onSize }) => {
 const RenderSmaller = ({ onChangeOrderRef, onPrice, onSize }) => {
   return (
     <>
+    <Row>
+      <Col xs={24} sm={12} style={{ height: '100%', display: 'flex' }}>
+        <TradeForm style={{ flex: 1 }} setChangeOrderRef={onChangeOrderRef} />
+      </Col>
+      <Col xs={24} sm={12}>
+        <StandaloneBalancesDisplay />
+      </Col>
+    </Row>
    <Row style={{ height: '50vh' }}>
         <TVChartContainer />
-      </Row>
-      <Row>
-        <Col xs={24} sm={12} style={{ height: '100%', display: 'flex' }}>
-          <TradeForm style={{ flex: 1 }} setChangeOrderRef={onChangeOrderRef} />
-        </Col>
-        <Col xs={24} sm={12}>
-          <StandaloneBalancesDisplay />
-        </Col>
       </Row>
       <Row
         style={{

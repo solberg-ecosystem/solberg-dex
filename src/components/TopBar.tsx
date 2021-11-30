@@ -6,7 +6,7 @@ import {
 import { Button, Col, Menu, Popover, Row, Select } from 'antd';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import logo from '../assets/logo.svg';
+import logo from '../assets/logodex.png';
 import styled from 'styled-components';
 import { useWallet } from '../utils/wallet';
 import { ENDPOINTS, useConnectionConfig } from '../utils/connection';
@@ -20,13 +20,13 @@ import AppSearch from './AppSearch';
 import { getTradePageUrl } from '../utils/markets';
 
 const Wrapper = styled.div`
-  background-color: #0d1017;
+  background-color: #11161D;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   padding: 0px 30px;
   flex-wrap: wrap;
-`;
+  box-shadow: 0px 0px 30px 5px rgba(0,0,0,0.5)`;
 const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -34,15 +34,15 @@ const LogoWrapper = styled.div`
   font-weight: bold;
   cursor: pointer;
   img {
-    height: 30px;
+    height: 50px;
     margin-right: 8px;
   }
 `;
 
 const EXTERNAL_LINKS = {
-  '/swap SOL': 'https://raydium.io/swap/?ammId=7nePGGLXC8JXj2UYRqa9eToHEEWjpQAuoXh5HX5cRKt',
-  '/swap USDT': 'https://raydium.io/swap/?ammId=HdbmraBtbNKuLG5FqMZ4ocfHhCaAuV8qkTyE1iqs8BQu',
-
+  '/website':'https://solbergtoken.com',
+  '/swap': 'https://swap.solbergtoken.com',
+  '/docs': 'https://docs.solbergtoken.com',
 };
 
 export default function TopBar() {
@@ -136,8 +136,7 @@ export default function TopBar() {
       />
       <Wrapper>
         <LogoWrapper onClick={() => history.push(tradePageUrl)}>
-          <img src={logo} alt="" />
-          {'SOLBERG'}
+          <img src={logo} alt="SOLBERG" />
         </LogoWrapper>
         <Menu
           mode="horizontal"
@@ -155,24 +154,35 @@ export default function TopBar() {
             TRADE
           </Menu.Item>
           {!searchFocussed && (
-            <Menu.Item key="/swap SOL" style={{ margin: '0 10px' }}>
+            <Menu.Item key="/website" style={{ margin: '0 10px' }}>
               <a
-                href={EXTERNAL_LINKS['/swap SOL']}
+                href={EXTERNAL_LINKS['/website']}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                SWAP SOL
+                WEBSITE
               </a>
             </Menu.Item>
           )}
-                    {!searchFocussed && (
-            <Menu.Item key="/swap USDT" style={{ margin: '0 10px' }}>
+          {!searchFocussed && (
+            <Menu.Item key="/swap" style={{ margin: '0 10px' }}>
               <a
-                href={EXTERNAL_LINKS['/swap USDT']}
+                href={EXTERNAL_LINKS['/swap']}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                SWAP USDT
+                SWAP SOLBERG
+              </a>
+            </Menu.Item>
+          )}
+          {!searchFocussed && (
+            <Menu.Item key="/docs" style={{ margin: '0 10px' }}>
+              <a
+                href={EXTERNAL_LINKS['/docs']}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                DOCS
               </a>
             </Menu.Item>
           )}

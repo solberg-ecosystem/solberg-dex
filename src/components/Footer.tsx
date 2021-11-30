@@ -7,7 +7,7 @@ const { Footer } = Layout;
 const { useBreakpoint } = Grid;
 
 const footerElements = [
-  { description: 'Solberg', link: helpUrls.solberg },
+  { description: 'Website', link: helpUrls.website },
   { description: 'About us', link: helpUrls.about },
   { description: 'Docs', link: helpUrls.docs },
   { description: 'Whitepaper', link: helpUrls.whitepaper },
@@ -23,6 +23,7 @@ export const CustomFooter = () => {
         height: '55px',
         paddingBottom: 10,
         paddingTop: 10,
+        backgroundColor: 'transparent',
       }}
     >
       {refCode && allowRefLink && (
